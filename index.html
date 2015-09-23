@@ -13,10 +13,12 @@
 <body>
     <div id="wrapper">
         <header class="meetup-header">
-            
+            <span><img src="imgs/meetup.svg" width="200" alt="Meetup Logo"></span>
+            <h1>Group Search</h1>
         </header>
+        <hr>
         <div id='map'>
-            <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=vacaville%2C%20ca&key=AIzaSyCQtLsJmLI7JH359XtRbREj-F9wG5LnUN4" allowfullscreen></iframe>
+            <iframe width="600" height="350" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=vacaville%2C%20ca&key=AIzaSyCQtLsJmLI7JH359XtRbREj-F9wG5LnUN4" allowfullscreen></iframe>
         </div>
         <section class="form-container">
             <form class="search-form" id="location-search">
@@ -24,9 +26,32 @@
                 <input class="submit-button" type="submit" name="submit" value="Submit"/>
             </form>
         </section>
+        <div class="results-container">
+            <div class="search-results">
+                <dl class="result groups">
+            <dt>Group Name:</dt>
+                <dd class="group-name"></dd>
+            <dt>Description:</dt>
+                <dd class="group-desc"></dd>
+            <dt>Location:</dt>
+                <dd class="group-location"></dd>
+            <dt>Group Page</dt>
+                <dd class="group-page"><a href="" targer="_blank"></a></dd>
+        </dl>
+            </div>
+        </div>
     </div>
     <div class="templates hidden">
-        
+        <dl class="result groups">
+            <dt>Group Name:</dt>
+                <dd class="group-name"></dd>
+            <dt>Description:</dt>
+                <dd class="group-desc"></dd>
+            <dt>Location:</dt>
+                <dd class="group-location"></dd>
+            <dt>Group Page</dt>
+                <dd class="group-page"><a href="" targer="_blank"></a></dd>
+        </dl>
     </div>
 </body>
 </html>

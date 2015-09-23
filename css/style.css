@@ -1,0 +1,40 @@
+html,
+body {
+    height: 100%;
+}
+html {
+    background-color: #f4f4f4;
+}
+body {
+    background-color: white;
+    max-width: 70em;
+    padding-top: 2em;
+}
+hr {
+    display: block;
+    margin: 0 0 2em 0;
+}
+body,
+#wrapper,
+.results-container {
+    margin: 0 auto;
+}
+.hidden {
+    display: none;
+}
+#wrapper {
+    max-width: 60em;
+    text-align: center;
+}
+.meetup-header {
+    height: 12.5em;
+    margin:0 0 2em 0;
+}
+#map {
+    margin-bottom: 2em;
+}
+.results-container {
+    margin-top: 5em;
+    width: 37.5em;
+    text-align: left;
+}
