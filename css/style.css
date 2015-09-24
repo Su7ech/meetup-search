@@ -3,12 +3,24 @@ body {
     height: 100%;
 }
 html {
+    overflow: auto;
     background-color: #f4f4f4;
 }
 body {
     background-color: white;
     max-width: 70em;
     padding-top: 2em;
+    position: absolute;
+    height: auto;
+    min-height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    box-shadow: 0 0 10px grey;
+}
+iframe {
+    width: 37.5em;
+    height: 21.875em;
 }
 hr {
     display: block;
@@ -34,7 +46,29 @@ body,
     margin-bottom: 2em;
 }
 .results-container {
-    margin-top: 5em;
+    margin-top: 3em;
     width: 37.5em;
     text-align: left;
+}
+.result {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+@media screen and (max-width: 768px) {
+    iframe {
+        width: 31.25em;
+        height: 15.625em;
+    }
+    #wrapper {
+        max-width: 35em;
+    }
+    .results-container {
+        width: 31.25em;
+        margin: 3em auto 0 auto;
+    }
+    .result > dt:nth-of-type(2),
+    .desc {
+        display: none;
+    }
 }
