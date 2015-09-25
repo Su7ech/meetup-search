@@ -11,6 +11,7 @@ $(function () {
 
 var map;
 var markers = [];
+var pos;
 
 window.initMap = function initMap() {
 
@@ -23,7 +24,7 @@ window.initMap = function initMap() {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
@@ -47,7 +48,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function showMapMarkers(location) {
-
+    var content = '<div id="content"><p><a href="'+ location.link + '" target=_blank>' + location.name + '</a></p></div>';
+    var infowindow = new google.maps.InfoWindow({
+        content: content
+    });
     var coordinates = {
         lat: location.lat,
         lng: location.lon
@@ -57,6 +61,9 @@ function showMapMarkers(location) {
         position: coordinates,
         title: location.name,
         animation: google.maps.Animation.DROP
+    });
+    marker.addListener('click', function() {
+        infowindow.open(map, marker);
     });
     markers.push(marker);
 }
@@ -104,6 +111,10 @@ function getMeetupGroups(query) {
         sign: 'true',
         key: '527e5759286c5e3562a144744e21a',
         page: 10,
+        lat: pos.lat,
+        lon: pos.lng,
+        radius: 20,
+        order: 'distance',
         text: query,
         callback: 'gotIt'
     }
