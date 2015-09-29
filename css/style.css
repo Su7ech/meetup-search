@@ -7,8 +7,9 @@ html {
     background-color: #f4f4f4;
 }
 body {
+    font-family: 'Raleway', sans-serif;
     background-color: white;
-    max-width: 70em;
+    /*max-width: 70em;*/
     padding-top: 2em;
     position: absolute;
     height: auto;
@@ -20,12 +21,26 @@ body {
 }
 hr {
     display: block;
-    margin: 0 0 2em 0;
 }
 body,
 #wrapper,
 .results-container {
     margin: 0 auto;
+}
+.search-page {
+}
+.results-page {
+    overflow: auto;
+}
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
 }
 .hidden {
     display: none;
@@ -34,26 +49,96 @@ body,
     max-width: 60em;
     text-align: center;
 }
+
+/*Header CSS*/
+
 .meetup-header {
     height: 12.5em;
-    margin:0 0 2em 0;
+    margin:0 auto;
+    width: 30em;
+    padding-left: 40px;
 }
+.meetup-header span img {
+    float: left;
+}
+.meetup-header h1 {
+    display: block;
+    width: 260px;
+    padding-top: 40px;
+    float: left;
+}
+
+/*Search Form CSS*/
+
+.form-container {
+    margin-bottom: 2em;
+}
+.search-box {
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid gray;
+    padding: 5px 10px;
+    width: 200px;
+}
+.submit-button {
+    color: white;
+    font-weight: 600;
+    background-color: #f00101;
+    padding: 5px;
+    border-radius: 20px;
+    width: 100px;
+    border: 1px solid lightgray;
+}
+.submit-button:hover {
+    background-color: red;
+}
+
+/*Map CSS*/
+
 #map {
+    display: none;
     margin: 0 auto;
     width: 37.5em;
     height: 21.875em;
 }
+
+/*Results CSS*/
+
 .results-container {
     margin-top: 3em;
-    width: 37.5em;
+    width: 60em;
     text-align: left;
 }
 .result {
     padding: 10px;
-    border: 1px solid black;
+}
+.group-title .group-photo,
+.group-title .name,
+.desc,
+.location {
+    float: left;
+    width: 100%;
+}
+.page {
+    float: left;
+}
+.group-photo {
+    margin-right: 15px;
 }
 
 @media screen and (max-width: 768px) {
+    .meetup-header {
+        margin-bottom: 0;
+        padding-left: 0;
+    }
+    .meetup-header span img,
+    .meetup-header h1 {
+        margin: 0 auto;
+        float: none;
+    }
+    .meetup-header h1 {
+        padding-top: 10px;
+    }
     #map {
         width: 31.25em;
         height: 15.625em;
@@ -64,9 +149,5 @@ body,
     .results-container {
         width: 31.25em;
         margin: 3em auto 0 auto;
-    }
-    .result > dt:nth-of-type(2),
-    .desc {
-        display: none;
     }
 }

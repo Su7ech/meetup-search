@@ -2,6 +2,8 @@ $(function () {
     $('#location-search').submit(function (event) {
         event.preventDefault();
         var userInput = $(event.target).children('[type=text]').val();
+        $('#map').show();
+        initMap();
         deleteMarkers();
         $('.search-results').html('');
         getMeetupGroups(userInput);
@@ -12,15 +14,18 @@ $(function () {
 var map;
 var markers = [];
 var pos;
+var markerWindow;
+var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var labelIndex = 0;
 
-window.initMap = function initMap() {
+function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 10,
         center: {lat: 38.258890099999995, lng: -122.0694764}
     });
 
-    var infoWindow = new google.maps.InfoWindow({map: map});
+    // var infoWindow = new google.maps.InfoWindow({map: map});
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -29,8 +34,8 @@ window.initMap = function initMap() {
                 lng: position.coords.longitude
             };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('You are here');
+            // infoWindow.setPosition(pos);
+            // infoWindow.setContent('You are here');
             map.setCenter(pos);
         }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -49,7 +54,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function showMapMarkers(location) {
     var content = '<div id="content"><p><a href="'+ location.link + '" target=_blank>' + location.name + '</a></p></div>';
-    var infowindow = new google.maps.InfoWindow({
+    markerWindow = new google.maps.InfoWindow({
         content: content
     });
     var coordinates = {
@@ -60,10 +65,12 @@ function showMapMarkers(location) {
         map: map,
         position: coordinates,
         title: location.name,
+        // label: labels[labelIndex++ % labels.length],
         animation: google.maps.Animation.DROP
     });
     marker.addListener('click', function() {
-        infowindow.open(map, marker);
+        markerWindow.setContent(content);
+        markerWindow.open(map, marker);
     });
     markers.push(marker);
 }
@@ -90,8 +97,13 @@ function deleteMarkers() {
 function showResults(group) {
     var result = $('.templates .groups').clone();
 
-    var groupName = result.find('.name');
-    groupName.html('<p>' + group.name + '</p>');
+    // var titlePhoto = result.find('.group-photo');
+
+    // titlePhoto.attr('src', group.group_photo.thumb_link);
+    // titlePhoto.attr('alt', group.name);
+
+    var groupTitle = result.find('.name');
+    groupTitle.html( group.name );
 
     var groupDesc = result.find('.desc');
     groupDesc.html('<p>' + group.description + '</p>')
