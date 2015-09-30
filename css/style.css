@@ -81,6 +81,7 @@ body,
     width: 200px;
 }
 .submit-button {
+    outline: none;
     color: white;
     font-weight: 600;
     background-color: #f00101;

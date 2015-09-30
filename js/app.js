@@ -1,13 +1,21 @@
+
+
 $(function () {
-    $('#location-search').submit(function (event) {
+        $('#location-search').submit(function (event) {
         event.preventDefault();
-        var userInput = $(event.target).children('[type=text]').val();
-        $('#map').show();
-        initMap();
-        deleteMarkers();
-        $('.search-results').html('');
-        getMeetupGroups(userInput);
-        $('.search-box').val('').focus();
+        userInput = $(event.target).children('[type=text]').val();
+
+        if (userInput.length < 1) {
+            alert("Please type a keyword to perform a search");
+            $('.search-box').focus();
+        } else {
+            $('#map').show();
+            initMap();
+            deleteMarkers();
+            $('.search-results').html('');
+            getMeetupGroups(userInput);
+            $('.search-box').val('').focus();
+        };
     });
 });
 
@@ -15,8 +23,6 @@ var map;
 var markers = [];
 var pos;
 var markerWindow;
-var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-var labelIndex = 0;
 
 function initMap() {
 
@@ -95,12 +101,7 @@ function deleteMarkers() {
 }
 
 function showResults(group) {
-    var result = $('.templates .groups').clone();
-
-    // var titlePhoto = result.find('.group-photo');
-
-    // titlePhoto.attr('src', group.group_photo.thumb_link);
-    // titlePhoto.attr('alt', group.name);
+    var result = $('.templates .result .results-list').clone();
 
     var groupTitle = result.find('.name');
     groupTitle.html( group.name );
@@ -117,6 +118,17 @@ function showResults(group) {
 
     return result;
 }
+
+function showSearchCount(query, resultNum) {
+    var results = resultNum + ' results for <strong>' + query;
+    return results;
+}
+
+var showError = function(error){
+    var errorElem = $('.templates .error').clone();
+    var errorText = '<p>' + error + '</p>';
+    errorElem.append(errorText);
+};
 
 function getMeetupGroups(query) {
     var params = {
@@ -136,13 +148,17 @@ function getMeetupGroups(query) {
         dataType: 'jsonp',
         type: 'GET'
     }).done(function(result) {
+        var searchResults = showSearchCount(params.text, result.data.length);
+
+        $('.search-results').html('<h4>' + searchResults + '</h4>');
         $.each(result.data, function(i, item) {
-            // showResults(item);
             $('.search-results').append(showResults(item));
-            // initMap(item);
             showMapMarkers(item);
-            console.log(item);
         });
+    }).fail(function(jqXHR, error, errorThrown) {
+        var errorElem = showError(error)
+        $('.search-results').append(errorElem);
     });
+
     return result;
 }
