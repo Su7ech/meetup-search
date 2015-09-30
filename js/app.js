@@ -1,21 +1,15 @@
 
 
 $(function () {
-        $('#location-search').submit(function (event) {
+    $('#location-search').submit(function (event) {
         event.preventDefault();
         userInput = $(event.target).children('[type=text]').val();
-
-        if (userInput.length < 1) {
-            alert("Please type a keyword to perform a search");
-            $('.search-box').focus();
-        } else {
-            $('#map').show();
-            initMap();
-            deleteMarkers();
-            $('.search-results').html('');
-            getMeetupGroups(userInput);
-            $('.search-box').val('').focus();
-        };
+        $('#map').show();
+        initMap();
+        deleteMarkers();
+        $('.search-results').html('');
+        getMeetupGroups(userInput);
+        $('.search-box').val('').focus();
     });
 });
 
@@ -120,7 +114,7 @@ function showResults(group) {
 }
 
 function showSearchCount(query, resultNum) {
-    var results = resultNum + ' results for <strong>' + query;
+    var results = resultNum + ' results for <strong>"' + query + '"';
     return results;
 }
 

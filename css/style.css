@@ -27,11 +27,6 @@ body,
 .results-container {
     margin: 0 auto;
 }
-.search-page {
-}
-.results-page {
-    overflow: auto;
-}
 .clearfix:before, .clearfix:after {
     content: "";
     display: table;
@@ -56,15 +51,19 @@ body,
     height: 12.5em;
     margin:0 auto;
     width: 30em;
-    padding-left: 40px;
+    /*padding-left: 40px;*/
+    padding-top: 40px;
 }
 .meetup-header span img {
     float: left;
+    margin-right: 10px;
 }
 .meetup-header h1 {
+    font-family: 'Gloria Hallelujah', cursive;
     display: block;
     width: 260px;
-    padding-top: 40px;
+    font-size: 40px;
+    padding-top: 5px;
     float: left;
 }
 
