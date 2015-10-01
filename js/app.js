@@ -1,11 +1,8 @@
-
-
 $(function () {
     $('#location-search').submit(function (event) {
         event.preventDefault();
         userInput = $(event.target).children('[type=text]').val();
         $('#map').show();
-        initMap();
         deleteMarkers();
         $('.search-results').html('');
         getMeetupGroups(userInput);
@@ -13,10 +10,14 @@ $(function () {
     });
 });
 
+// Global Variables
+
 var map;
 var markers = [];
 var pos;
 var markerWindow;
+
+// Initialize the Map and load location based on user location
 
 function initMap() {
 
@@ -25,8 +26,6 @@ function initMap() {
         center: {lat: 38.258890099999995, lng: -122.0694764}
     });
 
-    // var infoWindow = new google.maps.InfoWindow({map: map});
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             pos = {
@@ -34,8 +33,6 @@ function initMap() {
                 lng: position.coords.longitude
             };
 
-            // infoWindow.setPosition(pos);
-            // infoWindow.setContent('You are here');
             map.setCenter(pos);
         }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -45,12 +42,16 @@ function initMap() {
     }
 }
 
+// Handles Geolocation errors
+
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
         'Error: The Geolocation service failed' :
         'Error: Your browser doesn\'t support geolocation.');
 }
+
+// Shows markers on map for group locations if available
 
 function showMapMarkers(location) {
     var content = '<div id="content"><p><a href="'+ location.link + '" target=_blank>' + location.name + '</a></p></div>';
@@ -65,7 +66,6 @@ function showMapMarkers(location) {
         map: map,
         position: coordinates,
         title: location.name,
-        // label: labels[labelIndex++ % labels.length],
         animation: google.maps.Animation.DROP
     });
     marker.addListener('click', function() {
@@ -94,6 +94,8 @@ function deleteMarkers() {
     markers = [];
 }
 
+// Displays search results
+
 function showResults(group) {
     var result = $('.templates .result .results-list').clone();
 
@@ -110,12 +112,16 @@ function showResults(group) {
     groupLink.attr('href', group.link);
     groupLink.html('<p>Visit their page</p>');
 
+    initMap();
+
     return result;
 }
 
+// Displays number of results for search
+
 function showSearchCount(query, resultNum) {
-    var results = resultNum + ' results for <strong>"' + query + '"';
-    return results;
+    var resultCount = resultNum + ' results for <strong>"' + query + '"';
+    return resultCount;
 }
 
 var showError = function(error){
@@ -123,6 +129,8 @@ var showError = function(error){
     var errorText = '<p>' + error + '</p>';
     errorElem.append(errorText);
 };
+
+// Requests data from Meetup API to find groups
 
 function getMeetupGroups(query) {
     var params = {
@@ -145,12 +153,14 @@ function getMeetupGroups(query) {
         var searchResults = showSearchCount(params.text, result.data.length);
 
         $('.search-results').html('<h4>' + searchResults + '</h4>');
+        
         $.each(result.data, function(i, item) {
             $('.search-results').append(showResults(item));
             showMapMarkers(item);
         });
     }).fail(function(jqXHR, error, errorThrown) {
         var errorElem = showError(error)
+
         $('.search-results').append(errorElem);
     });
 

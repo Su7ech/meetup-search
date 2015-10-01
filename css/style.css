@@ -125,10 +125,13 @@ body,
 .group-photo {
     margin-right: 15px;
 }
+.error {
+    text-align: center;
+}
 
 @media screen and (max-width: 768px) {
     .meetup-header {
-        margin-bottom: 0;
+        margin-bottom: 2em;
         padding-left: 0;
     }
     .meetup-header span img,
