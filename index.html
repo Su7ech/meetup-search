@@ -1,76 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Meetup Search</title>
-    
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
-    
     <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtLsJmLI7JH359XtRbREj-F9wG5LnUN4&signed_in=true&callback=initMap"
-        async defer>
-    </script>
 </head>
+
 <body>
-    <div id="wrapper">
-        <header class="meetup-header">
-            <span><img src="imgs/meetup.svg" width="200" alt="Meetup Logo"></span>
-            <h1>Group Search</h1>
-        </header>
+  <div id="wrapper">
+    <header class="meetup-header">
+      <span><img src="imgs/meetup.svg" width="200" alt="Meetup Logo"></span>
+      <h1>Group Search</h1>
+    </header>
+    <hr>
+    <section class="form-container">
+      <form class="search-form" id="location-search">
+          <h4>Type a keyword to pull up a list of groups in the area</h4>
+          <input class="search-box" type="text" placeholder="Type a keyword" autofocus required/>
+          <input class="submit-button" type="submit" name="submit" onclick="beginSearch()" value="Submit" />
+      </form>
+    </section>
+    <div id='map'>
+    </div>
+    <div class="results-container">
+      <div class="search-results">
+        <!-- <div class="results-counter">
+          <h4 class="count"></h4>
+        </div> -->
+        <!-- <div class="result groups clearfix">
+          <div class="group-title clearfix">
+            <img src="http://photos2.meetupstatic.com/photos/event/5/1/b/9/thumb_433340921.jpeg" alt="" class="group-photo">
+            <h2 class="name">Group Name</h2>
+          </div>
+          <hr>
+          <div class="desc">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida justo, ut consequat lorem. Curabitur vulputate pellentesque nunc, at auctor lectus blandit eu. Aliquam posuere fringilla neque, id condimentum massa dignissim porta. Proin molestie dolor eget purus laoreet, non semper libero blandit. Nullam urna sem, bibendum vitae viverra non, maximus id purus. Vivamus ullamcorper felis vitae pulvinar feugiat.</p>
+          </div>
+          <div class="location"><p>Location: Fairfield, CA</p></div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="templates hidden">
+    <div class="result groups clearfix">
+      <div class="results-list groups clearfix">
         <hr>
-        <section class="form-container">
-            <form class="search-form" id="location-search">
-                <h4>Type a keyword to pull up a list of groups in the area</h4>
-                <input class="search-box" type="text" placeholder="Type a keyword" autofocus required/>
-                <input class="submit-button" type="submit" name="submit" value="Submit"/>
-            </form>
-        </section>
-        <div id='map'>
-        
+        <div class="group-title clearfix">
+          <h2 class="name"></h2>
         </div>
-        <div class="results-container">
-            <div class="search-results">
-                <!-- <div class="results-counter">
-                    <h4 class="count"></h4>
-                </div> -->
-                <!-- <div class="result groups clearfix">
-                    <div class="group-title clearfix">
-                        <img src="http://photos2.meetupstatic.com/photos/event/5/1/b/9/thumb_433340921.jpeg" alt="" class="group-photo">
-                        <h2 class="name">Group Name</h2>
-                    </div>
-                    <hr>
-                    <div class="desc">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida justo, ut consequat lorem. Curabitur vulputate pellentesque nunc, at auctor lectus blandit eu. Aliquam posuere fringilla neque, id condimentum massa dignissim porta. Proin molestie dolor eget purus laoreet, non semper libero blandit. Nullam urna sem, bibendum vitae viverra non, maximus id purus. Vivamus ullamcorper felis vitae pulvinar feugiat.</p>
-                    </div>
-                    <div class="location"><p>Location: Fairfield, CA</p></div>
-                </div> -->
-            </div>
+        <div class="desc">
         </div>
+        <div class="location"></div>
+        <div class="page">
+          <a href="" target="_blank"></a>
+        </div>
+      </div>
+      <div class="error clearfix">
+        <p>Uh-oh! Something went wrong with your request. Here's what we know:</p>
+      </div>
     </div>
-    <div class="templates hidden">
-        <div class="result groups clearfix">
-            <div class="results-list groups clearfix">
-                <hr>
-                <div class="group-title clearfix">
-                    <h2 class="name"></h2>
-                </div>
-                <div class="desc">
-                    
-                </div>
-                <div class="location"></div>
-                <div class="page"><a href="" target="_blank"></a></div>
-            </div>
-            <div class="error clearfix">
-                <p>Uh-oh! Something went wrong with your request. Here's what we know:</p>
-            </div>
-        </div>
-        <div class="no-results clearfix">
-            
-        </div>
-    </div>
-    <script src="js/app.js"></script>
+  </div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtLsJmLI7JH359XtRbREj-F9wG5LnUN4&signed_in=true&callback=initMap" async defer>
+  </script>
+  <script src="js/app.js"></script>
 </body>
+
 </html>
