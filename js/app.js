@@ -10,7 +10,9 @@
 //   //   $('.search-box').val('').focus();
 //   // });
 // });
-
+$(document).ready(function() {
+  // initMap();
+})
 // Global Variables
 
 var map;
@@ -98,6 +100,8 @@ function deleteMarkers() {
 // Displays search results
 
 function showResults(group) {
+  initMap();
+
   deleteMarkers();
   var result = $('.templates .result .results-list').clone();
 
@@ -113,8 +117,6 @@ function showResults(group) {
   var groupLink = result.find('.page a');
   groupLink.attr('href', group.link);
   groupLink.html('<p>Visit their page</p>');
-
-  initMap();
 
   return result;
 }
@@ -152,6 +154,7 @@ function getMeetupGroups(query) {
     dataType: 'jsonp',
     type: 'GET'
   }).done(function(result) {
+    console.log(result);
     var searchResults = showSearchCount(params.text, result.data.length);
 
     $('.search-results').html('<h4>' + searchResults + '</h4>');
@@ -173,7 +176,7 @@ function getMeetupGroups(query) {
 
 function beginSearch() {
   $('#location-search').submit(function (event) {
-    event.preventDefault();
+    event.preventDefault;
     var userInput = $(event.target).children('[type=text]').val();
     $('#map').show();
     $('.search-results').html('');
